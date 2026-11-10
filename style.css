@@ -1,0 +1,345 @@
+/* ==========================================================================
+   PAINEL DE CONTROLE DE CORES (ALTERE AS CORES AQUI!)
+   ========================================================================== */
+:root {
+  /* Fundo Geral da Página */
+  --bg-pagina: #f8fafc; /* Fundo cinza bem claro */
+
+  /* Cabeçalho (Header) */
+  --header-bg-gradient-start: #0c4a6e; /* Azul marinho escuro */
+  --header-bg-gradient-end: #312e81;   /* Roxo escuro */
+  --header-titulo: #ffffff;             /* Branco */
+  --header-subtitulo: #ffffff;          /* Azul bem claro */
+  --badge-feciba-bg: #e9eef0;           /* Azul celeste */
+  --badge-feciba-texto: #090d16;        /* Preto/Escuro */
+
+  /* Barra Superior de Acessibilidade */
+  --topbar-bg: #0f172a;                 /* Preto azulado */
+  --topbar-label: #ffffff;              /* Branco */
+  --btn-topbar-bg: #1e293b;             /* Cinza escuro */
+  --btn-topbar-texto: #ffffff;          /* Branco */
+  --btn-ouvir-tudo-bg: #150b8abc;         /* Verde */
+  --btn-ouvir-tudo-texto: #ffffff;      /* Branco */
+  --btn-parar-audio-bg: #e11d48;        /* Vermelho */
+  --btn-parar-audio-texto: #ffffff;     /* Branco */
+
+  /* Seções e Títulos */
+  --titulos-principais: #0f172a;        /* Azul bem escuro */
+
+  /* Cards das Etapas (Fotos + Textos) */
+  --card-bg: #ffffff;                   /* Fundo dos cards (Branco) */
+  --card-titulo: #0f172a;               /* Cor dos títulos dos cards */
+  --card-texto: #334155;                /* Cor dos parágrafos dos cards */
+  
+  /* Tags das Etapas */
+  --tag-geografia-texto: #000000;       /* Amarelo */
+  --tag-robotica-texto: #000000;        /* Amarelo */
+  --tag-integracao-texto: #000000;      /* Amarelo */
+
+  /* Botões dos Cards */
+  --btn-ouvir-card-bg: #e0f2fe;         /* Azul suave */
+  --btn-ouvir-card-texto: #0369a1;      /* Azul escuro */
+  --btn-ouvir-card-hover-bg: #bae6fd;   /* Azul ao passar o mouse */
+  
+  --btn-upload-bg: rgba(15, 23, 42, 0.85); /* Fundo escuro semitransparente */
+  --btn-upload-texto: #ffffff;             /* Branco */
+
+  /* Caixas Especiais */
+  --dica-box-bg: #f0f9ff;               /* Fundo azul pastel */
+  --dica-box-border: #0284c7;           /* Borda azul */
+  --dica-texto: #0369a1;                /* Texto azul */
+
+  /* Rodapé */
+  --footer-bg: #0f172a;                 /* Escuro */
+  --footer-texto-brilhante: #ffffff;    /* Branco */
+  --footer-texto: #ffffff;              /* Cinza claro */
+  --footer-texto-suave: #ffffff;        /* Cinza médio */
+}
+
+/* ==========================================================================
+   APLICAÇÃO DAS CORES NOS ELEMENTOS
+   ========================================================================== */
+
+body.feciba-body {
+  background-color: var(--bg-pagina);
+}
+
+/* BOTÃO: Alto Contraste */
+#btn-alto-contraste {
+  background-color: #150b8abc; /* Cor do fundo */
+  color: #ffffff;            /* Cor do texto e ícone */
+  font-weight: bold; /* Negrito */
+  border: 1px solid #475569; /* Cor da borda */
+}
+#btn-alto-contraste:hover {
+  background-color: #2f80f2; /* Cor ao passar o mouse */
+}
+
+/* BOTÃO: A+ (Aumentar Fonte) */
+#btn-aumentar-fonte {
+  background-color: #150b8abc; /* Cor do fundo (ex: troque por #059669 para verde) */
+  color: #ffffff;            /* Cor do texto */
+  font-weight: bold; /* Negrito */
+  border: 1px solid #475569; /* Cor da borda */
+}
+#btn-aumentar-fonte:hover {
+  background-color: #2f80f2; /* Cor ao passar o mouse */
+}
+
+/* BOTÃO: A- (Diminuir Fonte) */
+#btn-diminuir-fonte {
+  background-color: #e11d48; /* Cor do fundo (ex: troque por #e11d48 para vermelho) */
+  color: #ffffff;            /* Cor do texto */
+  font-weight: bold;
+  border: 1px solid #543f3a; /* Cor da borda */
+}
+#btn-diminuir-fonte:hover {
+  background-color: #f37979; /* Cor ao passar o mouse */
+}
+
+/* Permite que o A+ e A- redimensionem títulos e parágrafos */
+#conteudo-principal *, 
+header * {
+  font-size: inherit;
+}
+
+/* Header */
+.header-banner {
+  background: linear-gradient(to right, var(--header-bg-gradient-start), var(--header-bg-gradient-end));
+}
+.header-title { color: var(--header-titulo); }
+.header-subtitle { color: var(--header-subtitulo); }
+.badge-feciba {
+  background-color: var(--badge-feciba-bg);
+  color: var(--badge-feciba-texto);
+  font-size: 2rem !important;
+  padding: 15px 25px !important;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Barra Superior */
+.top-bar { background-color: var(--topbar-bg); }
+.text-topbar-label {
+  color: var(--topbar-label); 
+  font-size: 1.25rem !important; /* Mude de 1.15rem para 1.25rem ou 18px se quiser ainda maior */
+  font-weight: bold !important;
+  }
+.btn-topbar {
+  background-color: var(--btn-topbar-bg);
+  color: var(--btn-topbar-texto);
+  border: 1px solid #475569;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+}
+.btn-ouvir-tudo {
+  background-color: var(--btn-ouvir-tudo-bg);
+  color: var(--btn-ouvir-tudo-texto);
+  font-size: 0.95rem;        /* TAMANHO DO TEXTO */
+  font-weight: bold;
+  padding: 6px 14px;         /* TAMANHO DO BOTÃO */
+  border-radius: 8px;        /* Arredondamento dos cantos */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ouvir-tudo:hover {
+  background-color: #2f80f2; /* Cor ao passar o mouse */
+}
+
+.btn-parar-audio {
+  background-color: var(--btn-parar-audio-bg);
+  color: var(--btn-parar-audio-texto);
+  font-size: 0.95rem;        /* TAMANHO DO TEXTO */
+  font-weight: bold;
+  padding: 6px 14px;         /* TAMANHO DO BOTÃO */
+  border-radius: 8px;        /* Arredondamento dos cantos */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-parar-audio:hover {
+  background-color: #f37979; /* Cor ao passar o mouse */
+}
+
+/* Títulos */
+.section-title { color: var(--titulos-principais); }
+
+/* Cards */
+.card-bg { background-color: var(--card-bg); }
+.card-title { color: var(--card-titulo); }
+.card-text { color: var(--card-texto); }
+
+/* Força o negrito em todas as tags das etapas no modo normal */
+.card-tag {
+  font-weight: 800 !important; /* 800 deixa o negrito mais espesso/marcante */
+}
+
+.card-tag-geografia { color: var(--tag-geografia-texto); }
+.card-tag-robotica { color: var(--tag-robotica-texto); }
+.card-tag-integracao { color: var(--tag-integracao-texto); }
+
+.btn-ouvir-card {
+  background-color: var(--btn-ouvir-card-bg);
+  color: var(--btn-ouvir-card-texto);
+}
+.btn-ouvir-card:hover {
+  background-color: var(--btn-ouvir-card-hover-bg);
+  transform: scale(1.03);
+}
+
+.btn-upload {
+  background-color: var(--btn-upload-bg);
+  color: var(--btn-upload-texto);
+}
+
+/* Dica Box */
+.dica-box {
+  background-color: var(--dica-box-bg);
+  border-color: var(--dica-box-border);
+}
+.dica-text { color: var(--dica-texto); }
+
+/* Rodapé */
+.footer-bg { background-color: var(--footer-bg); }
+.footer-text-bright { color: var(--footer-texto-brilhante); }
+.footer-text { color: var(--footer-texto); }
+.footer-text-muted { color: var(--footer-texto-suave); }
+
+/* ==========================================================================
+   ACESSIBILIDADE DE TECLADO E ALTO CONTRASTE
+   ========================================================================== */
+
+.focus-ring:focus {
+  outline: 4px solid #f59e0b !important;
+  outline-offset: 2px;
+}
+
+/* Modo de Alto Contraste (Ativado via Botão) */
+/* ==========================================================================
+   MODO DE ALTO CONTRASTE PERSONALIZADO
+   ========================================================================== */
+
+/* Fundo Geral da Página em Preto */
+.high-contrast,
+.high-contrast body.feciba-body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   1. CABEÇALHO E BARRA SUPERIOR
+   -------------------------------------------------------------------------- */
+
+/* Parte de cima (Barra Superior e Banner do Cabeçalho) em Preto */
+.high-contrast .top-bar,
+.high-contrast .header-banner {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  border-bottom: 2px solid #ffffff !important;
+}
+
+/* Palavra "Acessibilidade:" em Branco e Negrito */
+.high-contrast .text-topbar-label {
+  color: #ffffff !important;
+  font-weight: bold !important;
+  font-size: 1.25rem !important;
+}
+
+/* Botão "Alto Contraste" */
+.high-contrast #btn-alto-contraste {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* Botão "A+" em Amarelo */
+.high-contrast #btn-aumentar-fonte {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* Botão "A-" em Vermelho */
+.high-contrast #btn-diminuir-fonte {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+/* Botões de Ouvir ("Ouvir História Completa" e "Ouvir Etapa") em Amarelo */
+.high-contrast #btn-ouvir-tudo,
+.high-contrast .btn-ouvir-card {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* Botão de "Parar Áudio" em Vermelho */
+.high-contrast #btn-parar-audio {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. CORPO DA PÁGINA (SOBRE O PROJETO E CARDS/ETAPAS)
+   -------------------------------------------------------------------------- */
+
+/* Fundo das caixas e cards em Preto com bordas Brancas */
+.high-contrast .card-bg,
+.high-contrast section,
+.high-contrast article {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+  /* Cor das Tags (Etapa 1, Etapa 4, etc.) no Alto Contraste */
+.high-contrast .card-tag {
+  color: #ffff00 !important;      /* Amarelo (ou #00ffff para Ciano / #ffffff para Branco) */
+  font-weight: bold !important;   /* Em negrito para facilitar a leitura */
+}
+
+/* Título "Sobre o Projeto" e Título das Etapas em Branco e Negrito */
+.high-contrast #tit-resumo,
+.high-contrast .section-title,
+.high-contrast .card-title {
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+/* Texto do "Sobre o Projeto" e Texto das Etapas/Imagens em Branco SEM Negrito */
+.high-contrast #texto-resumo,
+.high-contrast .card-text {
+  color: #ffffff !important;
+  font-weight: normal !important;
+}
+
+/* Botão de Inserir Foto nos Cards */
+.high-contrast .btn-upload {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* Caixa de Dica de Acessibilidade */
+.high-contrast .dica-box {
+  background-color: #000000 !important;
+  border-left: 4px solid #da1710 !important;
+}
+.high-contrast .dica-text {
+  color: #ffffff !important;
+}
+
+/* Rodapé em Preto */
+.high-contrast .footer-bg {
+  background-color: #000000 !important;
+  
+}
+.high-contrast .footer-text-bright,
+.high-contrast .footer-text,
+.high-contrast .footer-text-muted {
+  color: #ffffff !important;
+}

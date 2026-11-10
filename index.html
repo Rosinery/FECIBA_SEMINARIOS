@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FECIBA</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Estilos Customizados de Cores e Acessibilidade -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="feciba-body font-sans transition-colors duration-200">
+
+  <!-- Acessibilidade: Atalho de Teclado -->
+  <a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-yellow-300 focus:text-black focus:z-50">
+    Pular para o conteúdo principal
+  </a>
+
+  <!-- Barra Superior de Acessibilidade -->
+  <div class="top-bar py-2 px-4 shadow-md sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2 text-sm">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-topbar-label">Acessibilidade:</span>
+        <button id="btn-alto-contraste" class="btn-topbar focus-ring" aria-label="Alternar Alto Contraste">
+          👁️ Modo Escuro
+        </button>
+        <button id="btn-aumentar-fonte" class="btn-topbar focus-ring" aria-label="Aumentar Fonte">
+          A+
+        </button>
+        <button id="btn-diminuir-fonte" class="btn-topbar focus-ring" aria-label="Diminuir Fonte">
+          A-
+        </button>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button id="btn-ouvir-tudo" class="btn-ouvir-tudo focus-ring" aria-label="Ouvir toda a história em áudio">
+          🔊 Ouvir toda a página
+        </button>
+        <button id="btn-parar-audio" class="btn-parar-audio focus-ring" aria-label="Parar leitura em áudio">
+          🔇 Parar Áudio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho do Projeto -->
+  <header class="header-banner py-10 px-4 shadow-lg text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="badge-feciba inline-block font-extrabold rounded-full uppercase tracking-wider mb-3">
+        FECIBA
+      </span>
+        
+      <h1 class="header-title text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
+        INOVAÇÃO CONECTADA: <br>
+        COMO A ROBÓTICA E A CARTOGRAFIA TÁTIL PODEM ROMPER AS BARREIRAS DA MOBILIDADE ESCOLAR.
+      </h1>
+      <p class="header-subtitle text-lg md:text-xl max-w-2xl mx-auto font-light">
+        Integração entre <strong>Robótica</strong> e <strong>Geografia</strong>
+        para mapeamento e acessibilidade escolar.
+      </p>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="max-w-5xl mx-auto py-10 px-4">
+
+    <!-- Resumo do Projeto -->
+    <section class="card-bg p-6 md:p-8 rounded-2xl shadow-md border border-slate-200 mb-10" aria-labelledby="tit-resumo">
+      <h2 id="tit-resumo" class="card-title text-2xl font-bold mb-3 flex items-center gap-2">
+        📖 Sobre o Projeto
+      </h2>
+      <p id="texto-resumo" class="card-text leading-relaxed text-base md:text-lg mb-4">
+        Nosso projeto nasceu da necessidade de tornar o ambiente escolar acessível para estudantes
+        com deficiência visual. Unindo os estudos de cartografia tátil com os circuitos e
+        programação, os alunos construíram uma maquete interativa e o protótipo funcional 
+        de um robô inteligente equipado com sensores e câmera para leitura de QR Codes.
+      </p>
+      <div class="dica-box border-l-4 p-4 rounded-r-md">
+        <p class="dica-text text-sm md:text-base font-medium">
+          💡 <strong>Dica de Acessibilidade:</strong> 
+          Você pode clicar nos botões de áudio em cada etapa para ouvir o relato dos alunos 
+          ou usar a plataforma Libras no canto da tela!
+        </p>
+      </div>
+    </section>
+
+    <h2 class="section-title text-2xl md:text-3xl font-extrabold mb-8 text-center">
+       Etapas do Processo de Criação
+    </h2>
+
+    <!-- Grid de Cards de Etapas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- CARD 1 -->
+      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card1-titulo">
+        <div>
+          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
+            <img id="img-card-1" src="https://via.placeholder.com/600x400?text=Foto+1:+Mapeamento+Geografico" alt="Alunos estudando a planta baixa da escola em aula de geografia" class="w-full h-full object-cover">
+            <label for="input-img-1" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+              📷 Inserir Foto 1
+            </label>
+            <input type="file" id="input-img-1" accept="image/*" class="sr-only input-foto" data-target="img-card-1">
+          </div>
+          <div class="p-6">
+            <span class="card-tag card-tag-geografia text-xs font-bold uppercase tracking-widest">Etapa 1 • Geografia</span>
+            <h3 id="card1-titulo" class="card-title text-xl font-bold mt-1 mb-2">1. Reconhecimento do Espaço Escolar</h3>
+            <p id="card1-texto" class="card-text text-base leading-relaxed">
+              Iniciamos o projeto analisando a maquete tátil e o mapa da escola sob a perspectiva da Geografia Inclusiva. 
+              Os alunos mapearam os trajetos diários, identificando rampas, degraus e pontos de referência essenciais para a locomoção 
+              do estudante cego. Essa análise espacial foi a base para planejar a maquete sensorial e os pontos de orientação por onde 
+              o protótipo irá navegar.
+            </p>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card1-titulo" data-text="card1-texto" data-img="img-card-1">
+            🔊 Ouvir Etapa 1
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card2-titulo">
+        <div>
+          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
+            <img id="img-card-2" src="https://via.placeholder.com/600x400?text=Foto+2:+Construção+da+Maquete" alt="Estudantes colando diferentes texturas para criar a maquete tátil" class="w-full h-full object-cover">
+            <label for="input-img-2" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+              📷 Inserir Foto 2
+            </label>
+            <input type="file" id="input-img-2" accept="image/*" class="sr-only input-foto" data-target="img-card-2">
+          </div>
+          <div class="p-6">
+            <span class="card-tag card-tag-geografia text-xs font-bold uppercase tracking-widest">Etapa 2 • Geografia & Tátil</span>
+            <h3 id="card2-titulo" class="card-title text-xl font-bold mt-1 mb-2">2. Confecção da Maquete Sensorial</h3>
+            <p id="card2-texto" class="card-text text-base leading-relaxed">
+              Transformamos o mapeamento em uma experiência tátil utilizando materiais recicláveis e sustentáveis. 
+              A turma produziu o mapa tátil aplicando diferentes texturas — como lixas, E.V.A. e cordas — para representar o relevo, 
+              os tipos de piso, os corredores e as divisões da escola. 
+              Cada elemento foi pensado para que o estudante cego pudesse reconhecer e memorizar o espaço escolar com total autonomia 
+              através do toque.
+            </p>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card2-titulo" data-text="card2-texto" data-img="img-card-2">
+            🔊 Ouvir Etapa 2
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card3-titulo">
+        <div>
+          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
+            <img id="img-card-3" src="https://via.placeholder.com/600x400?text=Foto+3:+Montagem+dos+Circuitos" alt="Alunos montando circuito eletrônico com sensores ultrassônicos e Arduino" class="w-full h-full object-cover">
+            <label for="input-img-3" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+              📷 Inserir Foto 3
+            </label>
+            <input type="file" id="input-img-3" accept="image/*" class="sr-only input-foto" data-target="img-card-3">
+          </div>
+          <div class="p-6">
+            <span class="card-tag card-tag-robotica text-xs font-bold uppercase tracking-widest">Etapa 3 • Robótica & Hardware</span>
+            <h3 id="card3-titulo" class="card-title text-xl font-bold mt-1 mb-2">3. Circuitos e Sensores Ultrassônicos</h3>
+            <p id="card3-texto" class="card-text text-base leading-relaxed">
+              Iniciamos a montagem da eletrônica do protótipo! Na bancada de Robótica, os alunos realizaram as conexões do 
+              microcontrolador Arduino, preparando a estrutura para integrar a câmera e os módulos de alimentação. 
+              Essa etapa garantiu a base de hardware necessária para capturar as informações visuais dos QR Codes ao longo da maquete 
+              e transmitir os dados para a síntese de voz.
+            </p>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card3-titulo" data-text="card3-texto" data-img="img-card-3">
+            🔊 Ouvir Etapa 3
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card4-titulo">
+        <div>
+          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
+            <img id="img-card-4" src="https://via.placeholder.com/600x400?text=Foto+4:+Programação+do+Codigo" alt="Aluno digitando o código de programação no computador conectado ao protótipo" class="w-full h-full object-cover">
+            <label for="input-img-4" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+              📷 Inserir Foto 4
+            </label>
+            <input type="file" id="input-img-4" accept="image/*" class="sr-only input-foto" data-target="img-card-4">
+          </div>
+          <div class="p-6">
+            <span class="card-tag card-tag-robotica text-xs font-bold uppercase tracking-widest">Etapa 4 • Programação</span>
+            <h3 id="card4-titulo" class="card-title text-xl font-bold mt-1 mb-2">4. Programação e Lógica do Sensor</h3>
+            <p id="card4-texto" class="card-text text-base leading-relaxed">
+              Desenvolvemos o código de programação responsável pela lógica de reconhecimento e processamento dos dados! 
+              A equipe responsável pela codificação programou o sistema para calibrar o foco e o tempo de leitura da câmera, 
+              garantindo que a aproximação a cerca de 50 cm do QR Code acione instantaneamente a captura. 
+              O código converte esses dados visuais em comandos que o aplicativo CardBoot e o TalkBack interpretam para sintetizar a 
+              rota em áudio.
+            </p>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card4-titulo" data-text="card4-texto" data-img="img-card-4">
+            🔊 Ouvir Etapa 4
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card5-titulo">
+        <div>
+          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
+            <img id="img-card-5" src="https://via.placeholder.com/600x400?text=Foto+5:+Montagem+do+Prototipo" alt="Fixação dos componentes eletrônicos e bateria na haste da bengala" class="w-full h-full object-cover">
+            <label for="input-img-5" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+              📷 Inserir Foto 5
+            </label>
+            <input type="file" id="input-img-5" accept="image/*" class="sr-only input-foto" data-target="img-card-5">
+          </div>
+          <div class="p-6">
+            <span class="card-tag card-tag-integracao text-xs font-bold uppercase tracking-widest">Etapa 5 • Integração</span>
+            <h3 id="card5-titulo" class="card-title text-xl font-bold mt-1 mb-2">5. Integração na Maquete</h3>
+            <p id="card5-texto" class="card-text text-base leading-relaxed">
+              Com o circuito montado, iniciamos a integração do protótipo com a maquete tátil para os primeiros testes de navegação. 
+              A câmera do robô lê os QR Codes espalhados pelo percurso e transmite as informações ao aplicativo CardBoot no celular. 
+              Através do TalkBack, o sistema sintetiza em áudio as rotas exatas para o estudante chegar aos laboratórios e salas de aula.
+              A estrutura conta com bateria recarregável e suporte ergonômico e leve.
+            </p>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card5-titulo" data-text="card5-texto" data-img="img-card-5">
+            🔊 Ouvir Etapa 5
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 6 -->
+      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card6-titulo">
+        <div>
+          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
+            <img id="img-card-6" src="https://via.placeholder.com/600x400?text=Foto+6:+Testes+Práticos" alt="Aluno testando a bengala inteligente navegando no percurso com a maquete sensorial" class="w-full h-full object-cover">
+            <label for="input-img-6" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+              📷 Inserir Foto 6
+            </label>
+            <input type="file" id="input-img-6" accept="image/*" class="sr-only input-foto" data-target="img-card-6">
+          </div>
+          <div class="p-6">
+            <span class="card-tag card-tag-integracao text-xs font-bold uppercase tracking-widest">Etapa 6 • Teste & Validação</span>
+            <h3 id="card6-titulo" class="card-title text-xl font-bold mt-1 mb-2">6. Testes Práticos e Validação Inclusiva</h3>
+            <p id="card6-texto" class="card-text text-base leading-relaxed">
+              EM CONSTRUÇÃO. IDEIA E IRÁ SER MELHORADA, SÓ ESBOÇO: <br>
+              Validação do Protótipo e Impacto Inclusivo: estamos realizando as simulações práticas para homologar o sistema de navegação 
+              por áudio. Testamos a precisão da leitura dos QR Codes na maquete e a clareza das orientações do aplicativo CardBoot 
+              com o TalkBack. Essa etapa comprovou o valor fundamental da interdisciplinaridade entre a Geografia — que forneceu o
+              mapeamento espacial e a análise cartográfica tátil — e a Robótica, que viabilizou a automação do sistema. 
+              O projeto valida o uso de tecnologias assistivas de baixo custo como ferramenta real de mobilidade e inclusão escolar.
+            </p>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card6-titulo" data-text="card6-texto" data-img="img-card-6">
+            🔊 Ouvir Etapa 6
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer-bg py-8 px-4 mt-12 text-center text-sm border-t border-slate-800">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <p class="font-semibold footer-text-bright">Projeto Apresentado na FECIBA • Feira de Ciências, Empreendedorismo Social 
+        e Inovação da Bahia</p>
+      <p class="footer-text font-medium">Desenvolvido de forma interdisciplinar: Robótica & Geografia,<br>
+        Por todos os alunos do 2º INFORMÁTICA VESPERTINO <br>
+        Profª Orientadora: Rosinery Medeiros <br>
+        Profª Coorientadora: Maraísa Santana <br>
+        Colaborador PIBID UFBA: Pedro Gabriel
+      </p>
+
+      <p class="text-xs footer-text-muted">Página Web Responsiva, Acessível em VLibras e Leitura por Voz para Cegos.</p>
+    </div>
+  </footer>
+
+  <!-- Widget VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
