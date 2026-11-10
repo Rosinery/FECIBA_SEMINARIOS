@@ -3,48 +3,83 @@ new window.VLibras.Widget('https://vlibras.gov.br/app');
 
 // Sintetizador de Voz Nativo (Web Speech API)
 // Sintetizador de Voz Nativo (Web Speech API) - Versão Otimizada Web/GitHub
+// Sintetizador de Voz Nativo (Otimizado para Mobile & GitHub Pages)
 const synth = window.speechSynthesis;
+let speechQueue = [];
+let currentUtteranceIndex = 0;
+let isSpeakingFullStory = false;
 
-function speakText(text) {
-  if (!synth) {
-    alert('Seu navegador não suporta a funcionalidade de leitura em voz alta.');
+// Função auxiliar para tocar a fila no celular
+function processQueue() {
+  if (!isSpeakingFullStory || currentUtteranceIndex >= speechQueue.length) {
+    isSpeakingFullStory = false;
+    currentUtteranceIndex = 0;
+    const btnOuvir = document.getElementById('btn-ouvir-tudo');
+    if (btnOuvir) btnOuvir.innerHTML = '🔊 Ouvir História Completa';
     return;
   }
-  
-  // Cancela qualquer fala anterior antes de iniciar
-  synth.cancel();
 
-  // Pequeno timeout para garantir que o cancelamento anterior foi processado pelo navegador
-  setTimeout(() => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'pt-BR';
-    utterance.rate = 1.0;
-    utterance.pitch = 1.0;
+  const textChunk = speechQueue[currentUtteranceIndex];
+  if (!textChunk.trim()) {
+    currentUtteranceIndex++;
+    processQueue();
+    return;
+  }
 
-    // Tenta selecionar uma voz em português disponível no sistema
-    const voices = synth.getVoices();
-    const ptVoice = voices.find(voice => voice.lang.includes('pt') || voice.lang.includes('PT'));
-    if (ptVoice) {
-      utterance.voice = ptVoice;
-    }
+  const utterance = new SpeechSynthesisUtterance(textChunk);
+  utterance.lang = 'pt-BR';
+  utterance.rate = 1.0;
 
-    synth.speak(utterance);
-  }, 50);
+  // Seleção segura de voz PT-BR
+  const voices = synth.getVoices();
+  const ptVoice = voices.find(v => v.lang && (v.lang.includes('pt') || v.lang.includes('PT')));
+  if (ptVoice) {
+    utterance.voice = ptVoice;
+  }
+
+  // Quando terminar a frase atual, passa para a próxima da fila
+  utterance.onend = () => {
+    currentUtteranceIndex++;
+    processQueue();
+  };
+
+  // Tratamento de erro no mobile
+  utterance.onerror = (e) => {
+    console.error('Erro na reprodução de trecho:', e);
+    currentUtteranceIndex++;
+    processQueue();
+  };
+
+  synth.speak(utterance);
 }
 
 // Parar o áudio imediatamente
 function stopSpeech() {
+  isSpeakingFullStory = false;
+  speechQueue = [];
+  currentUtteranceIndex = 0;
   if (synth) {
     synth.cancel();
   }
+  const btnOuvir = document.getElementById('btn-ouvir-tudo');
+  if (btnOuvir) btnOuvir.innerHTML = '🔊 Ouvir História Completa';
 }
 
-// Ler toda a história do projeto (Versão Segura para GitHub Pages)
+// Ler toda a história do projeto (Compatível com Celular)
 function speakFullStory() {
+  if (!synth) {
+    alert('Seu navegador não suporta leitura em voz alta.');
+    return;
+  }
+
+  // Cancela áudios anteriores
+  stopSpeech();
+
+  // Coleta os textos com segurança
   const elementoResumo = document.getElementById('texto-resumo');
   const resumo = elementoResumo ? elementoResumo.innerText : '';
   
-  let fullContent = `Apresentação do Projeto FECIBA: Bengala Inteligente e Maquete Sensorial. ${resumo}. A seguir, apresentamos as seis etapas do projeto: `;
+  let fullText = `Apresentação do Projeto FECIBA: Bengala Inteligente e Maquete Sensorial. ${resumo}. `;
 
   for (let i = 1; i <= 6; i++) {
     const elTitulo = document.getElementById(`card${i}-titulo`);
@@ -55,18 +90,40 @@ function speakFullStory() {
     const texto = elTexto ? elTexto.innerText : '';
     const imgAlt = (elImg && elImg.alt) ? elImg.alt : '';
 
-    fullContent += ` Etapa ${i}: ${titulo}. Descrição da imagem: ${imgAlt}. História: ${texto}. `;
+    fullText += `Etapa ${i}: ${titulo}. Descrição da imagem: ${imgAlt}. ${texto}. `;
   }
-  
-  speakText(fullContent);
+
+  // DIVIDE O TEXTO EM FRASES CURTAS (Evita que o celular cancele textos longos)
+  speechQueue = fullText.split(/(?<=[.?!])\s+/);
+  currentUtteranceIndex = 0;
+  isSpeakingFullStory = true;
+
+  const btnOuvir = document.getElementById('btn-ouvir-tudo');
+  if (btnOuvir) btnOuvir.innerHTML = '🔊 Lendo...';
+
+  // Inicia a fila de áudio imediatamente no toque do usuário
+  processQueue();
 }
 
-function speakCard(titleId, textId, imgId) {
-  const titulo = document.getElementById(titleId).innerText;
-  const texto = document.getElementById(textId).innerText;
-  const imgAlt = document.getElementById(imgId).alt;
-  const content = `${titulo}. Descrição da foto: ${imgAlt}. ${texto}`;
-  speakText(content);
+// Ler apenas o card/etapa individual no celular
+function speakCardText(cardNumber) {
+  if (!synth) return;
+  stopSpeech();
+
+  const elTitulo = document.getElementById(`card${cardNumber}-titulo`);
+  const elTexto = document.getElementById(`card${cardNumber}-texto`);
+  const elImg = document.getElementById(`img-card-${cardNumber}`);
+
+  const titulo = elTitulo ? elTitulo.innerText : '';
+  const texto = elTexto ? elTexto.innerText : '';
+  const imgAlt = (elImg && elImg.alt) ? elImg.alt : '';
+
+  const textToSpeak = `Etapa ${cardNumber}: ${titulo}. Descrição da imagem: ${imgAlt}. ${texto}`;
+  
+  speechQueue = textToSpeak.split(/(?<=[.?!])\s+/);
+  currentUtteranceIndex = 0;
+  isSpeakingFullStory = true;
+  processQueue();
 }
 
 function toggleHighContrast() {
