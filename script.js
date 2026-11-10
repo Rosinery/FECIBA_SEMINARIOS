@@ -4,48 +4,51 @@ new window.VLibras.Widget('https://vlibras.gov.br/app');
 // Sintetizador de Voz Nativo (Web Speech API)
 // Sintetizador de Voz Nativo (Web Speech API) - Versão Otimizada Web/GitHub
 // Sintetizador de Voz Nativo (Otimizado para Mobile & GitHub Pages)
+// ==========================================================================
+// SINTETIZADOR DE VOZ NATIVO (Compatível com Celular, Computador e GitHub)
+// ==========================================================================
+// ==========================================================================
+// SINTETIZADOR DE VOZ NATIVO (Compatível com Celular, Computador e GitHub)
+// ==========================================================================
 const synth = window.speechSynthesis;
 let speechQueue = [];
 let currentUtteranceIndex = 0;
-let isSpeakingFullStory = false;
+let isSpeaking = false;
 
-// Função auxiliar para tocar a fila no celular
+// Função universal que toca a fila de frases sem cortar
 function processQueue() {
-  if (!isSpeakingFullStory || currentUtteranceIndex >= speechQueue.length) {
-    isSpeakingFullStory = false;
-    currentUtteranceIndex = 0;
-    const btnOuvir = document.getElementById('btn-ouvir-tudo');
-    if (btnOuvir) btnOuvir.innerHTML = '🔊 Ouvir História Completa';
+  if (!isSpeaking || currentUtteranceIndex >= speechQueue.length) {
+    stopSpeech();
     return;
   }
 
   const textChunk = speechQueue[currentUtteranceIndex];
-  if (!textChunk.trim()) {
+  if (!textChunk || !textChunk.trim()) {
     currentUtteranceIndex++;
     processQueue();
     return;
   }
 
-  const utterance = new SpeechSynthesisUtterance(textChunk);
+  const utterance = new SpeechSynthesisUtterance(textChunk.trim());
   utterance.lang = 'pt-BR';
   utterance.rate = 1.0;
 
-  // Seleção segura de voz PT-BR
+  // Seleção de voz em Português
   const voices = synth.getVoices();
   const ptVoice = voices.find(v => v.lang && (v.lang.includes('pt') || v.lang.includes('PT')));
   if (ptVoice) {
     utterance.voice = ptVoice;
   }
 
-  // Quando terminar a frase atual, passa para a próxima da fila
+  // Avança para a próxima frase da fila quando terminar a atual
   utterance.onend = () => {
     currentUtteranceIndex++;
     processQueue();
   };
 
-  // Tratamento de erro no mobile
+  // Prevenção de erro em celulares
   utterance.onerror = (e) => {
-    console.error('Erro na reprodução de trecho:', e);
+    console.error('Erro na fala:', e);
     currentUtteranceIndex++;
     processQueue();
   };
@@ -53,38 +56,47 @@ function processQueue() {
   synth.speak(utterance);
 }
 
-// Parar o áudio imediatamente
+// Parar o áudio imediatamente e resetar estado
 function stopSpeech() {
-  isSpeakingFullStory = false;
+  isSpeaking = false;
   speechQueue = [];
   currentUtteranceIndex = 0;
+  
   if (synth) {
     synth.cancel();
   }
-  const btnOuvir = document.getElementById('btn-ouvir-tudo');
-  if (btnOuvir) btnOuvir.innerHTML = '🔊 Ouvir História Completa';
+  
+  const btnOuvirTudo = document.getElementById('btn-ouvir-tudo');
+  if (btnOuvirTudo) {
+    btnOuvirTudo.innerHTML = '🔊 Ouvir ';
+  }
 }
 
-// Ler toda a história do projeto (Compatível com Celular)
+// 1. LER PÁGINA COMPLETA
 function speakFullStory() {
   if (!synth) {
     alert('Seu navegador não suporta leitura em voz alta.');
     return;
   }
 
-  // Cancela áudios anteriores
   stopSpeech();
 
-  // Coleta os textos com segurança
+  const elTituloPrincipal = document.querySelector('h1');
+  const elSubtitulo = document.querySelector('.header-subtitle');
+  const tituloPrincipal = elTituloPrincipal ? elTituloPrincipal.innerText : '';
+  const subtitulo = elSubtitulo ? elSubtitulo.innerText : '';
+
   const elementoResumo = document.getElementById('texto-resumo');
   const resumo = elementoResumo ? elementoResumo.innerText : '';
   
-  let fullText = `Apresentação do Projeto FECIBA: Bengala Inteligente e Maquete Sensorial. ${resumo}. `;
+  let fullText = `${tituloPrincipal}. ${subtitulo}. Rompendo barreiras, buscando acessibilidade. ${resumo}. 
+  A seguir, apresentamos as seis etapas do projeto: `;
 
   for (let i = 1; i <= 6; i++) {
     const elTitulo = document.getElementById(`card${i}-titulo`);
     const elTexto = document.getElementById(`card${i}-texto`);
-    const elImg = document.getElementById(`img-card-${i}`);
+    // Busca flexível do ID da imagem (aceita img-card-1 ou img-card1)
+    const elImg = document.getElementById(`img-card-${i}`) || document.getElementById(`img-card${i}`);
 
     const titulo = elTitulo ? elTitulo.innerText : '';
     const texto = elTexto ? elTexto.innerText : '';
@@ -93,38 +105,66 @@ function speakFullStory() {
     fullText += `Etapa ${i}: ${titulo}. Descrição da imagem: ${imgAlt}. ${texto}. `;
   }
 
-  // DIVIDE O TEXTO EM FRASES CURTAS (Evita que o celular cancele textos longos)
   speechQueue = fullText.split(/(?<=[.?!])\s+/);
   currentUtteranceIndex = 0;
-  isSpeakingFullStory = true;
+  isSpeaking = true;
 
-  const btnOuvir = document.getElementById('btn-ouvir-tudo');
-  if (btnOuvir) btnOuvir.innerHTML = '🔊 Lendo...';
+  const btnOuvirTudo = document.getElementById('btn-ouvir-tudo');
+  if (btnOuvirTudo) {
+    btnOuvirTudo.innerHTML = '🔊 Lendo...';
+  }
 
-  // Inicia a fila de áudio imediatamente no toque do usuário
   processQueue();
 }
 
-// Ler apenas o card/etapa individual no celular
-function speakCardText(cardNumber) {
-  if (!synth) return;
+// 2. LER ETAPA INDIVIDUAL (1 a 6)
+// 2. LER ETAPA INDIVIDUAL (Compatível com atributos data-title, data-text e data-img)
+function speakCardTextFromButton(button) {
+  if (!synth) {
+    alert('Seu navegador não suporta leitura em voz alta.');
+    return;
+  }
+
   stopSpeech();
 
-  const elTitulo = document.getElementById(`card${cardNumber}-titulo`);
-  const elTexto = document.getElementById(`card${cardNumber}-texto`);
-  const elImg = document.getElementById(`img-card-${cardNumber}`);
+  // Pega os IDs diretamente dos atributos data-* do botão que foi clicado
+  const idTitulo = button.getAttribute('data-title');
+  const idTexto = button.getAttribute('data-text');
+  const idImg = button.getAttribute('data-img');
+
+  const elTitulo = idTitulo ? document.getElementById(idTitulo) : null;
+  const elTexto = idTexto ? document.getElementById(idTexto) : null;
+  const elImg = idImg ? document.getElementById(idImg) : null;
 
   const titulo = elTitulo ? elTitulo.innerText : '';
   const texto = elTexto ? elTexto.innerText : '';
   const imgAlt = (elImg && elImg.alt) ? elImg.alt : '';
 
-  const textToSpeak = `Etapa ${cardNumber}: ${titulo}. Descrição da imagem: ${imgAlt}. ${texto}`;
-  
+  let textToSpeak = `${titulo}. `;
+  if (imgAlt) {
+    textToSpeak += `Descrição da imagem: ${imgAlt}. `;
+  }
+  textToSpeak += `${texto}`;
+
+  // Divide em frases curtas para funcionar perfeitamente no celular e no computador
   speechQueue = textToSpeak.split(/(?<=[.?!])\s+/);
   currentUtteranceIndex = 0;
-  isSpeakingFullStory = true;
+  isSpeaking = true;
+
   processQueue();
 }
+
+// CONECTA AUTOMATICAMENTE OS BOTÕES DAS ETAPAS AO CLIQUE
+document.addEventListener('DOMContentLoaded', () => {
+  const botoesEtapas = document.querySelectorAll('.btn-ouvir-card');
+  
+  botoesEtapas.forEach(botao => {
+    botao.addEventListener('click', (e) => {
+      e.preventDefault();
+      speakCardTextFromButton(botao);
+    });
+  });
+});
 
 function toggleHighContrast() {
   document.body.classList.toggle('high-contrast');
@@ -183,3 +223,5 @@ document.addEventListener('DOMContentLoaded', () => {
     input.addEventListener('change', handleImagePreview);
   });
 });
+
+let fullText = `Rompendo barreiras, buscando acessibilidade ${resumo}. `;
