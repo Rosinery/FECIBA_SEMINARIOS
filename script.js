@@ -70,9 +70,16 @@ function stopSpeech() {
   if (btnOuvirTudo) {
     btnOuvirTudo.innerHTML = '🔊 Ouvir ';
   }
+
+  const botoesEtapas = document.querySelectorAll('.btn-ouvir-card');
+  botoesEtapas.forEach((btn, index) => {
+    btn.innerHTML = `🔊 Ouvir Etapa ${index + 1}`;
+  });
 }
 
 // 1. LER PÁGINA COMPLETA
+// 1. LER PÁGINA COMPLETA (Sem quebras de linha que cortam a frase inicial)
+// 1. LER PÁGINA COMPLETA (Com "Rompendo barreiras" no início de tudo)
 function speakFullStory() {
   if (!synth) {
     alert('Seu navegador não suporta leitura em voz alta.');
@@ -89,23 +96,25 @@ function speakFullStory() {
   const elementoResumo = document.getElementById('texto-resumo');
   const resumo = elementoResumo ? elementoResumo.innerText : '';
   
-  let fullText = `${tituloPrincipal}. ${subtitulo}. Rompendo barreiras, buscando acessibilidade. ${resumo}. 
-  A seguir, apresentamos as seis etapas do projeto: `;
+  // A frase agora vem PRIMEIRO, antes do título principal e do subtítulo
+  let fullText = `Rompendo barreiras, buscando acessibilidade. ${tituloPrincipal}. ${subtitulo}. ${resumo}. A seguir, apresentamos as seis etapas do projeto: `;
 
   for (let i = 1; i <= 6; i++) {
     const elTitulo = document.getElementById(`card${i}-titulo`);
     const elTexto = document.getElementById(`card${i}-texto`);
-    // Busca flexível do ID da imagem (aceita img-card-1 ou img-card1)
     const elImg = document.getElementById(`img-card-${i}`) || document.getElementById(`img-card${i}`);
 
     const titulo = elTitulo ? elTitulo.innerText : '';
     const texto = elTexto ? elTexto.innerText : '';
     const imgAlt = (elImg && elImg.alt) ? elImg.alt : '';
 
-    fullText += `Etapa ${i}: ${titulo}. Descrição da imagem: ${imgAlt}. ${texto}. `;
+    fullText += `Etapa ${i}: ${titulo}. ${imgAlt ? 'Descrição da imagem: ' + imgAlt + '.' : ''} ${texto}. `;
   }
 
-  speechQueue = fullText.split(/(?<=[.?!])\s+/);
+  // Sanitiza quebras de linha e limpa múltiplos espaços para não devorar a frase no mobile
+  const cleanText = fullText.replace(/\s+/g, ' ').trim();
+  speechQueue = cleanText.split(/(?<=[.?!])\s+/);
+  
   currentUtteranceIndex = 0;
   isSpeaking = true;
 
@@ -120,12 +129,14 @@ function speakFullStory() {
 // 2. LER ETAPA INDIVIDUAL (1 a 6)
 // 2. LER ETAPA INDIVIDUAL (Compatível com atributos data-title, data-text e data-img)
 function speakCardTextFromButton(button) {
+  document.getElementById('btn-ouvir-tudo').innerHTML = '🔊 Lendo...';
   if (!synth) {
     alert('Seu navegador não suporta leitura em voz alta.');
     return;
   }
 
   stopSpeech();
+  
 
   // Pega os IDs diretamente dos atributos data-* do botão que foi clicado
   const idTitulo = button.getAttribute('data-title');
@@ -225,3 +236,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let fullText = `Rompendo barreiras, buscando acessibilidade ${resumo}. `;
+
