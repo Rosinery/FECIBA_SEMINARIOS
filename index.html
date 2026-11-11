@@ -93,32 +93,39 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
       <!-- CARD 1 -->
-      <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card1-titulo">
-        <div>
-          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
-            <img id="img-card-1" src="https://via.placeholder.com/600x400?text=Foto+1:+Mapeamento+Geografico" alt="Alunos estudando a planta baixa da escola em aula de geografia" class="w-full h-full object-cover">
-            <label for="input-img-1" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
-              📷 Inserir Foto 1
-            </label>
-            <input type="file" id="input-img-1" accept="image/*" class="sr-only input-foto" data-target="img-card-1">
-          </div>
-          <div class="p-6">
-            <span class="card-tag card-tag-geografia text-xs font-bold uppercase tracking-widest">Etapa 1 • Geografia</span>
-            <h3 id="card1-titulo" class="card-title text-xl font-bold mt-1 mb-2">1. Reconhecimento do Espaço Escolar</h3>
-            <p id="card1-texto" class="card-text text-base leading-relaxed">
-              Iniciamos o projeto analisando a maquete tátil e o mapa da escola sob a perspectiva da Geografia Inclusiva. 
-              Os alunos mapearam os trajetos diários, identificando rampas, degraus e pontos de referência essenciais para a locomoção 
-              do estudante cego. Essa análise espacial foi a base para planejar a maquete sensorial e os pontos de orientação por onde 
-              o protótipo irá navegar.
-            </p>
-          </div>
-        </div>
-        <div class="p-6 pt-0">
-          <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card1-titulo" data-text="card1-texto" data-img="img-card-1">
-            🔊 Ouvir Etapa 1
-          </button>
-        </div>
-      </article>
+<article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card1-titulo">
+  <div>
+    <!-- REMOVIDO o h-64 e ADICIONADO h-auto para a div crescer junto com a imagem -->
+    <div class="relative bg-slate-200 h-auto flex items-center justify-center overflow-hidden">
+      <!-- CORRIGIDO para object-contain e h-auto -->
+      <img 
+        id="img-card-1" 
+        src="GEO.jpeg" 
+        alt="mapeando os corredores da escola com bengala, utilizando máquina Braille, acessando computador adaptado no laboratório e navegando por rampas e obstáculos." 
+        class="w-full h-auto object-contain block"
+      />           
+     <!-- <label for="input-img-1" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+        📷 Inserir Foto 1
+      </label> -->
+      <input type="file" id="input-img-1" accept="image/*" class="sr-only input-foto" data-target="img-card-1">
+    </div>
+    <div class="p-6">
+      <span class="card-tag card-tag-geografia text-xs font-bold uppercase tracking-widest">Etapa 1 • Geografia</span>
+      <h3 id="card1-titulo" class="card-title text-xl font-bold mt-1 mb-2">1. Reconhecimento do Espaço Escolar</h3>
+      <p id="card1-texto" class="card-text text-base leading-relaxed">
+        Iniciamos o projeto analisando a maquete tátil e o mapa da escola sob a perspectiva da Geografia Inclusiva. 
+        Os alunos mapearam os trajetos diários, identificando rampas, degraus e pontos de referência essenciais para a locomoção 
+        do estudante cego. Essa análise espacial foi a base para planejar a maquete sensorial e os pontos de orientação por onde 
+        o protótipo irá navegar.
+      </p>
+    </div>
+  </div>
+  <div class="p-6 pt-0">
+    <button class="btn-ouvir-card w-full font-semibold py-2 px-4 rounded-xl flex items-center justify-center gap-2 focus-ring transition" data-title="card1-titulo" data-text="card1-texto" data-img="img-card-1">
+      🔊 Ouvir Etapa 1
+    </button>
+  </div>
+</article>
 
       <!-- CARD 2 -->
       <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card2-titulo">

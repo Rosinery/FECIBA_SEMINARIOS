@@ -181,6 +181,22 @@ header * {
 .card-tag-robotica { color: var(--tag-robotica-texto); }
 .card-tag-integracao { color: var(--tag-integracao-texto); }
 
+/* Justifica o texto do resumo ("Sobre o Projeto") e o texto de todos os cards */
+#texto-resumo,
+[id^="card"][id$="-texto"] {
+  text-align: justify;
+}
+
+/* Garante que a imagem inteira apareça sem nenhum corte de topo ou base */
+.btn-ouvir-card ~ img,
+[id^="img-card"] {
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  display: block;
+}
+
 .btn-ouvir-card {
   background-color: var(--btn-ouvir-card-bg);
   color: var(--btn-ouvir-card-texto);
