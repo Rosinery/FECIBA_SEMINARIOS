@@ -100,7 +100,7 @@
       <!-- CORRIGIDO para object-contain e h-auto -->
       <img 
         id="img-card-1" 
-        src="MAPAGEO.jpeg" 
+        src="img/MAPAGEO.jpeg" 
         alt="mapeando os corredores da escola com bengala e navegando por rampas e obstáculos." 
         class="w-full h-auto object-contain block"
       />           
@@ -138,7 +138,11 @@
       <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card2-titulo">
         <div>
           <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
-            <img id="img-card-2" src="https://via.placeholder.com/600x400?text=Foto+2:+Construção+da+Maquete" alt="Estudantes colando diferentes texturas para criar a maquete tátil" class="w-full h-full object-cover">
+            <img 
+        id="img-card-1" 
+        src="img/MAPAGEO.jpeg" 
+        alt="mapeando os corredores da escola com bengala e navegando por rampas e obstáculos." 
+        class="w-full h-auto object-contain block"/>
             <label for="input-img-2" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
               📷 Inserir Foto 2
             </label>
@@ -166,21 +170,30 @@
       <!-- CARD 3 -->
       <article class="card-bg rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col justify-between" aria-labelledby="card3-titulo">
         <div>
-          <div class="relative bg-slate-200 h-64 flex items-center justify-center overflow-hidden">
-            <img id="img-card-3" src="https://via.placeholder.com/600x400?text=Foto+3:+Montagem+dos+Circuitos" alt="Alunos montando circuito eletrônico com sensores ultrassônicos e Arduino" class="w-full h-full object-cover">
-            <label for="input-img-3" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
+          <div class="relative bg-slate-200 w-full flex items-center justify-center">
+            <img id="img-card-3" 
+                src="img/C1.jpeg" 
+                alt="Alunos montando circuito eletrônico com sensores ultrassônicos e Arduino" 
+                class="w-full h-auto object-contain block">
+           <!-- <label for="input-img-3" class="btn-upload absolute bottom-2 right-2 text-xs px-3 py-2 rounded-lg cursor-pointer flex items-center gap-1 focus-ring">
               📷 Inserir Foto 3
-            </label>
+            </label> -->
             <input type="file" id="input-img-3" accept="image/*" class="sr-only input-foto" data-target="img-card-3">
           </div>
           <div class="p-6">
             <span class="card-tag card-tag-robotica text-xs font-bold uppercase tracking-widest">Etapa 3 • Robótica & Hardware</span>
             <h3 id="card3-titulo" class="card-title text-xl font-bold mt-1 mb-2">3. Circuitos e Sensores Ultrassônicos</h3>
             <p id="card3-texto" class="card-text text-base leading-relaxed">
-              Iniciamos a montagem da eletrônica do protótipo! Na bancada de Robótica, os alunos realizaram as conexões do 
-              microcontrolador Arduino, preparando a estrutura para integrar a câmera e os módulos de alimentação. 
-              Essa etapa garantiu a base de hardware necessária para capturar as informações visuais dos QR Codes ao longo da maquete 
-              e transmitir os dados para a síntese de voz.
+              Iniciamos a montagem da eletrônica do protótipo na bancada de robótica, 
+              onde os estudantes realizaram as conexões práticas dos componentes do sistema. <br>
+              A atividade envolveu a integração do microcontrolador Arduino Uno, 
+              módulos de relé de 5V e o posicionamento estratégico dos sensores ultrassônicos 
+              e infravermelhos TCRT5000 para a detecção de obstáculos e leitura de trajetos. <br>
+              Essa etapa prática de prototipagem garantiu a base robusta de hardware necessária 
+              para o funcionamento do sistema de navegação assistiva. 
+              Com os circuitos devidamente soldados, testados em protoboard e integrados 
+              à estrutura física, o protótipo ganhou autonomia para processar os estímulos 
+              do ambiente e traduzi-los em respostas táteis e sonoras eficientes.
             </p>
           </div>
         </div>
